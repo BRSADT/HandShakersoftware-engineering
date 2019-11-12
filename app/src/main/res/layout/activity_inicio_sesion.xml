@@ -75,7 +75,7 @@ android:orientation="vertical">
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/txtPass"
+            android:id="@+id/txtApellido"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

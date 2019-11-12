@@ -9,23 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Registro extends AppCompatActivity {
     Button btnGoogle,enviar;
@@ -34,6 +28,8 @@ public class Registro extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public String cuenta,pass;
     public EditText txtCuenta,txtContra;
+    public RadioGroup tipo;
+    public RadioButton cliente, trabajador;
     private static final String TAG = "GoogleActivity";
 
     private static final int RC_SIGN_IN = 9001;
@@ -43,32 +39,35 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         enviar= (Button)findViewById(R.id.btnEnviar);
         txtCuenta= (EditText) findViewById(R.id.txtCuenta);
+        tipo=(RadioGroup) findViewById(R.id.Tipo);
+        cliente=(RadioButton) findViewById(R.id.soyCliente);
+        trabajador=(RadioButton) findViewById(R.id.soyTrabajador);
+        txtContra= (EditText) findViewById(R.id.txtPass);
+        mAuth = FirebaseAuth.getInstance();
+        tipo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                enviar.setEnabled(true);
+            }
+        });
 
-        txtContra= (EditText) findViewById(R.id.txtContra);
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-cuenta=txtCuenta.getText().toString();
-pass=txtContra.getText().toString();
+        cuenta=txtCuenta.getText().toString();
+        pass=txtContra.getText().toString();
                 Registrar();
-
-
             }
 
         });
 
-              mAuth = FirebaseAuth.getInstance();
-    /*   btnGoogle.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
 
-           }
-
-       });
-      */
 
 
     }
+
     public void Registrar(){
         mAuth.createUserWithEmailAndPassword(cuenta, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -79,10 +78,28 @@ pass=txtContra.getText().toString();
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(getApplicationContext(),"Se ha registrado" , Toast.LENGTH_SHORT).show();
+                            int id=tipo.getCheckedRadioButtonId();
+                            int idCliente=cliente.getId();
+
+                            if (id==cliente.getId()){
+                                //se va a toma datos cliente
+                                Intent i=new Intent(Registro.this,DatosClientes.class);
+                                startActivity(i);
+                            }
+                            else{
+                                if (id==trabajador.getId()){
+                                    //se va a toma datos trabajador
+                                    Intent i=new Intent(Registro.this,DatosTrabajadores.class);
+                                    startActivity(i);
+                                }
+
+                            }
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(Registro.this, "Authentication failed.",
+                            Toast.makeText(Registro.this, "Error con la cuenta a registrar.",
                                     Toast.LENGTH_SHORT).show();
 
                         }

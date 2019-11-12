@@ -50,13 +50,13 @@
                     android:inputType="textEmailAddress" />
 
                 <EditText
-                    android:id="@+id/txtContra"
+                    android:id="@+id/txtPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:ems="10"
                     android:hint="contraseña"
-                    android:inputType="numberPassword" />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -80,13 +80,45 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"></LinearLayout>
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Soy..." />
+
+                <RadioGroup
+                    android:id="@+id/Tipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:gravity="top">
+
+                    <RadioButton
+                        android:id="@+id/soyTrabajador"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Trabajador" />
+
+                    <RadioButton
+                        android:id="@+id/soyCliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Cliente" />
+                </RadioGroup>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnEnviar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:text="enviar" />
 
             <LinearLayout
