@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/avatarUsuario"
                 android:layout_width="143dp"
                 android:layout_height="148dp"
                 app:srcCompat="@android:drawable/star_on" />

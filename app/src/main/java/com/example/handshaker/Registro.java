@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class Registro extends AppCompatActivity {
     Button btnGoogle,enviar;
@@ -27,6 +28,7 @@ public class Registro extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     public String cuenta,pass;
+    FirebaseStorage storage ;
     public EditText txtCuenta,txtContra;
     public RadioGroup tipo;
     public RadioButton cliente, trabajador;
@@ -41,6 +43,7 @@ public class Registro extends AppCompatActivity {
         txtCuenta= (EditText) findViewById(R.id.txtCuenta);
         tipo=(RadioGroup) findViewById(R.id.Tipo);
         cliente=(RadioButton) findViewById(R.id.soyCliente);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         trabajador=(RadioButton) findViewById(R.id.soyTrabajador);
         txtContra= (EditText) findViewById(R.id.txtPass);
         mAuth = FirebaseAuth.getInstance();

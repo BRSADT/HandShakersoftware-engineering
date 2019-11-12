@@ -23,7 +23,7 @@ android:orientation="vertical">
         android:orientation="horizontal"></LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/avatarUsuario"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -75,7 +75,7 @@ android:orientation="vertical">
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/txtApellido"
+            android:id="@+id/txtPass"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
