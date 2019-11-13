@@ -42,7 +42,7 @@ import android.widget.TextView;
 
 import static com.example.handshaker.GlideOptions.fitCenterTransform;
 
-public class prueba extends AppCompatActivity {
+public class inicioTrabajador extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth mAuth;
