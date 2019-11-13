@@ -4,8 +4,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +22,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Source;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -30,6 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import static com.example.handshaker.GlideOptions.fitCenterTransform;
 
@@ -39,8 +48,10 @@ public class prueba extends AppCompatActivity {
     private FirebaseAuth mAuth;
     StorageReference storageRef;
     FirebaseStorage storage ;
-    StorageReference pathReference,fotoPerfil;
+    public TextView Nombre,Apellido, correo;
+    StorageReference pathReference,fotoPerfil,referencia ;
     public ImageView avatar;
+    private  FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,35 +86,46 @@ public class prueba extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         storageRef = storage.getReference();
-        StorageReference pathReference = storageRef.child(mAuth.getUid());
-        StorageReference fotoPerfil=pathReference.child("profile.jpg");
+        db = FirebaseFirestore.getInstance();
+        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_prueba);
+        Nombre=(TextView) hView.findViewById(R.id.Nombreuser);
+        correo=(TextView) hView.findViewById(R.id.correoUser);
+        avatar = (ImageView)hView.findViewById(R.id.avatarUsuario);
 
-        avatar=(ImageView) findViewById(R.id.avatarUsuario);
+        referencia = storage.getReference().child(mAuth.getUid()).child("profile.jpg");
 
-        fotoPerfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+       GlideApp.with(this )
+                .load(referencia)
+                .into(avatar);
+
+
+        DocumentReference docRef = db.collection("Trabajador").document(mAuth.getUid());
+
+// Source can be CACHE, SERVER, or DEFAULT.
+        Source source = Source.CACHE;
+
+// Get the document, forcing the SDK to use the offline cache
+        docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Uri uri) {
-                String imageURL = uri.toString();
-                Log.d("imagen", imageURL);
-                //YA SE TIENE LA URL DE DESCARGA, FALTA PONER EN AVATAR ESA IMAGEN DE ESE URL , SE RECOMIENDA GLIDE PERO A MI NO ME FUNCIONO
-             //   Glide.with(getApplicationContext()).load(imageURL).into(avatar);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Document found in the offline cache
+                    DocumentSnapshot document = task.getResult();
+                    document.get("Apellido");
+                    document.get("Nombre");
+                    Nombre.setText(document.get("Nombre").toString()+" "+document.get("Apellido").toString());
+                    correo.setText(mAuth.getCurrentUser().getEmail());
+                    Log.d("Datos-info del usuario", "Cached document data: " + document.getData());
+                } else {
+                    Log.d("Datos-Error", "Cached get failed: ", task.getException());
+                }
             }
         });
 
 
 
-      /* Glide.with(this)
-                .load(fotoPerfil)
-                .into(avatar);
-*/
-
-    }
+   }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
