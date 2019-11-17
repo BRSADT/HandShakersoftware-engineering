@@ -58,7 +58,7 @@ public class inicioSesion extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(),"Ha ingresado" , Toast.LENGTH_SHORT).show();
 
-                            Intent i=new Intent(inicioSesion.this,prueba.class);
+                            Intent i=new Intent(inicioSesion.this,inicioTrabajador.class);
                             startActivity(i);
                         } else {
                             Toast .makeText(getApplicationContext(),"No es correcto email" , Toast.LENGTH_SHORT).show();

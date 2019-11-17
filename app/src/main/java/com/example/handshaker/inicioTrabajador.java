@@ -1,12 +1,9 @@
 package com.example.handshaker;
 
-import android.net.Uri;
 import android.os.Bundle;
 
-import com.bumptech.glide.Glide;
+import com.example.handshaker.ui.home.HomeViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -15,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,8 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -37,13 +33,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import static com.example.handshaker.GlideOptions.fitCenterTransform;
 
 public class inicioTrabajador extends AppCompatActivity {
-
+    private HomeViewModel homeViewModel;
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth mAuth;
     StorageReference storageRef;
@@ -52,6 +53,9 @@ public class inicioTrabajador extends AppCompatActivity {
     StorageReference pathReference,fotoPerfil,referencia ;
     public ImageView avatar;
     private  FirebaseFirestore db;
+    ArrayList<LinearLayout> layoutSeparar=new ArrayList<LinearLayout>();
+    ArrayList<ImageButton> icono=new ArrayList<ImageButton >();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,9 @@ public class inicioTrabajador extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,19 +82,25 @@ public class inicioTrabajador extends AppCompatActivity {
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
+
+       NavController navController = Navigation.findNavController(this, R.id.fragmento);
+       NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+       NavigationUI.setupWithNavController(navigationView, navController);
+
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
+        View hView = navigationView.getHeaderView(0);
 
 
-// Create a reference with an initial file path and name
+
+
+
+//CAMBIAR LA BARRA LATERAL
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
         mAuth = FirebaseAuth.getInstance();
         storageRef = storage.getReference();
         db = FirebaseFirestore.getInstance();
-        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_prueba);
         Nombre=(TextView) hView.findViewById(R.id.Nombreuser);
         correo=(TextView) hView.findViewById(R.id.correoUser);
         avatar = (ImageView)hView.findViewById(R.id.avatarUsuario);
@@ -98,14 +111,8 @@ public class inicioTrabajador extends AppCompatActivity {
        GlideApp.with(this )
                 .load(referencia)
                 .into(avatar);
-
-
         DocumentReference docRef = db.collection("Trabajador").document(mAuth.getUid());
-
-// Source can be CACHE, SERVER, or DEFAULT.
         Source source = Source.CACHE;
-
-// Get the document, forcing the SDK to use the offline cache
         docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -124,6 +131,12 @@ public class inicioTrabajador extends AppCompatActivity {
         });
 
 
+        //CAMBIAR VISTA HOME(DONDE APARECERAN LOS OFICIOS)
+        //View homeView = navigationView.get(0);
+       /* homeViewModel =
+                ViewModelProviders.of(this).get(HomeViewModel.class);
+        View homeView = inflater.inflate(R.layout.fragment_home, container, false);
+*/
 
    }
 
@@ -136,7 +149,7 @@ public class inicioTrabajador extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.fragmento);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

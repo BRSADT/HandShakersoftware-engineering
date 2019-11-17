@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".prueba"
-            android:label="@string/title_activity_prueba"
+            android:name=".inicioTrabajador"
+
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".InicioTrabajador" />
+
         <activity android:name=".DatosTrabajadores" />
         <activity android:name=".DatosClientes" />
         <activity android:name=".inicioSesion" />
