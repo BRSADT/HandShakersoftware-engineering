@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
                                 icono.get(x).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Toast.makeText(homeView.getContext(),view.getTag().toString() , Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(homeView.getContext(),view.getTag().toString() , Toast.LENGTH_SHORT).show();
 
                                         GalleryFragment newGamefragment = new GalleryFragment();
                                         FragmentTransaction fragmentTransaction;
@@ -85,8 +85,9 @@ public class HomeFragment extends Fragment {
                                         arguments.putString("Seleccion",view.getTag().toString() );
 
                                         fragmentTransaction = getFragmentManager().beginTransaction();
-                                      //  fragmentTransaction .setArguments(arguments);
-                                        fragmentTransaction.replace(R.id.fragmento,new GalleryFragment());
+                                        newGamefragment.setArguments(arguments);
+
+                                        fragmentTransaction.replace(R.id.fragmento, newGamefragment);
                                         fragmentTransaction.addToBackStack(null);
                                         fragmentTransaction.commit();
 

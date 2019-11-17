@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.handshaker.R;
 
 public class GalleryFragment extends Fragment {
-
+String sel="";
     private GalleryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,6 +31,17 @@ public class GalleryFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            sel = bundle.getString("Seleccion");
+            Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+
         return root;
     }
 }
