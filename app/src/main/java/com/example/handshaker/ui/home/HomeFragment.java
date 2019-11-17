@@ -81,7 +81,11 @@ public class HomeFragment extends Fragment {
 
                                         GalleryFragment newGamefragment = new GalleryFragment();
                                         FragmentTransaction fragmentTransaction;
+                                        Bundle arguments = new Bundle();
+                                        arguments.putString("Seleccion",view.getTag().toString() );
+
                                         fragmentTransaction = getFragmentManager().beginTransaction();
+                                      //  fragmentTransaction .setArguments(arguments);
                                         fragmentTransaction.replace(R.id.fragmento,new GalleryFragment());
                                         fragmentTransaction.addToBackStack(null);
                                         fragmentTransaction.commit();
