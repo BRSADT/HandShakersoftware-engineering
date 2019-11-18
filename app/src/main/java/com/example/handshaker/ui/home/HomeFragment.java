@@ -55,7 +55,12 @@ public class HomeFragment extends Fragment {
 
          ll = (LinearLayout)homeView.findViewById(R.id.Scroll);
          o = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-        db = FirebaseFirestore.getInstance();
+
+         //CONSULTA OFICIOS
+         db = FirebaseFirestore.getInstance();
+
+
+
        db.collection("Oficios")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -120,21 +125,6 @@ public class HomeFragment extends Fragment {
                 });
 
 
-  /*      for (int x=0;x<10;x++){
-
-            layoutSeparar.add(new LinearLayout(homeView.getContext()));
-            o.setMargins(0,0,0,10);
-            layoutSeparar.get(x).setLayoutParams(o);
-            layoutSeparar.get(x).setOrientation(LinearLayout.HORIZONTAL);
-            icono.add(new Button(homeView.getContext()));
-            icono.get(x).setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2.0f));
-            icono.get(x).setText("x");
-            icono.get(x).setBackgroundResource(R.drawable.driver);
-            layoutSeparar.get(x).addView(icono.get(x));
-
-        }
-
-    */
 
 
         return homeView;
