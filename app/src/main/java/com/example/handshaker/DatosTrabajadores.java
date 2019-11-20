@@ -57,9 +57,9 @@ public class DatosTrabajadores extends AppCompatActivity {
     StorageReference storageRef;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    public EditText txtNombre,txtApellido, txtCorreoContacto, txtTelefono;
+    public EditText txtNombre,txtApellido, txtCorreoContacto, txtTelefono, txtInfo;
     public Spinner cmbOficio, cmbHor1, cmbHor2;
-    Button guardar, btnCurriculum;
+    Button guardar;
     CheckBox chkbxUrgencia;
     ImageButton avatar;
 
@@ -88,6 +88,7 @@ public class DatosTrabajadores extends AppCompatActivity {
         txtApellido = (EditText) findViewById(R.id.txtApellido);
         txtCorreoContacto = (EditText) findViewById(R.id.txtCorreoContacto);
         txtTelefono = (EditText) findViewById(R.id.txtTelefono);
+        txtInfo = (EditText) findViewById(R.id.txtInfo);
 
         LlenarHorarios();
         ObtenerOficios();
@@ -112,7 +113,6 @@ public class DatosTrabajadores extends AppCompatActivity {
         bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_avatardefecto);
 
         chkbxUrgencia = (CheckBox) findViewById(R.id.chkbxUrgencia);
-        btnCurriculum = (Button)findViewById(R.id.btnCurriculum);
         guardar= (Button)findViewById(R.id.btnEnviar);
         avatar=(ImageButton)  findViewById(R.id.avatar);
 
@@ -143,6 +143,8 @@ public class DatosTrabajadores extends AppCompatActivity {
                     user.put("FechaReg", ObtenerFechaHoy());
                     user.put("Urgencia", chkbxUrgencia.isChecked());
                     user.put("PagoVigente", false);
+                    String resumen = txtInfo.getText().toString();
+                    user.put("Info", resumen);
 
                     //Add a new document with a generated ID
                     db.collection("Trabajador").document(mAuth.getUid()).set(user)

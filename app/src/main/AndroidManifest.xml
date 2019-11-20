@@ -14,7 +14,9 @@
 
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".DatosTrabajadores" />
+        <activity android:name=".DatosTrabajadores"
+            android:label="Ingresar Información"/>
+
         <activity android:name=".DatosClientes" />
         <activity android:name=".inicioSesion" />
         <activity android:name=".Registro" />
