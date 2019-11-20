@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
 
          //CONSULTA OFICIOS
          db = FirebaseFirestore.getInstance();
-
+//HOLA
 
 
        db.collection("Oficios")
