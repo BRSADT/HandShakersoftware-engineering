@@ -144,7 +144,7 @@ public class DatosTrabajadores extends AppCompatActivity {
                     user.put("Urgencia", chkbxUrgencia.isChecked());
                     user.put("PagoVigente", false);
                     String resumen = txtInfo.getText().toString();
-                    user.put("Info", resumen);
+                    user.put("Info", resumen); //AQUI
 
                     //Add a new document with a generated ID
                     db.collection("Trabajador").document(mAuth.getUid()).set(user)
