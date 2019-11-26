@@ -17,9 +17,13 @@
         <activity android:name=".DatosTrabajadores"
             android:label="Ingresar Información"/>
 
-        <activity android:name=".DatosClientes" />
+        <activity android:name=".DatosClientes"
+            android:label="Ingresar Información"/>
+
         <activity android:name=".inicioSesion" />
-        <activity android:name=".Registro" />
+        <activity android:name=".Registro"
+            android:label ="Registro"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

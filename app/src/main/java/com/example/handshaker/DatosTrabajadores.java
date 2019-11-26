@@ -177,22 +177,16 @@ public class DatosTrabajadores extends AppCompatActivity {
                         }
                     });
                 }
-                else{
-
-                }
             }
         });
 
-
-
         avatar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-            abrirGaleria(view);
-        }
-
-});
+                abrirGaleria(view);
+            }
+        });
 
     }
     @Override
