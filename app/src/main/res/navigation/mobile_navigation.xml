@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.handshaker.ui.home.HomeFragment"
+        android:name="com.example.handshaker.ui.NombresOficios.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.handshaker.ui.gallery.GalleryFragment"
+        android:name="com.example.handshaker.ui.TrabajadoresOficioSeleccionado.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.handshaker.ui.tools.ToolsFragment"
+        android:name="com.example.handshaker.ui.TrabajadorSeleccionado.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.example.handshaker.ui.send.SendFragment"
+        android:name="com.example.handshaker.ui.Mensaje.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

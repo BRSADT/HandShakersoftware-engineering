@@ -1,28 +1,21 @@
-package com.example.handshaker.ui.home;
+package com.example.handshaker.ui.NombresOficios;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.handshaker.GlideApp;
 import com.example.handshaker.R;
-import com.example.handshaker.ui.gallery.GalleryFragment;
+import com.example.handshaker.ui.TrabajadoresOficioSeleccionado.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +38,7 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     FirebaseStorage storage ;
     StorageReference referencia ;
+    ArrayList<StorageReference> refe=new ArrayList<StorageReference>();
     LinearLayout ll;
     StorageReference storageReference;
     LinearLayout.LayoutParams o;
@@ -82,23 +76,25 @@ public class HomeFragment extends Fragment {
                                 o.setMargins(0,0,0,10);
                                 layoutSeparar.get(x).setLayoutParams(o);
                                 layoutSeparar.get(x).setOrientation(LinearLayout.HORIZONTAL);
+
+
+
+                                String re=document.get("nombreOficio").toString()+".png";
+
+                                FirebaseStorage storage = FirebaseStorage.getInstance();
+
+                                referencia = storage.getReference().child("fotosOficios").child(re);
+
+
+
+
                                 icono.add(new ImageView(homeView.getContext()));
-
-
-                                icono.get(x).setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2.0f));
-                            //    icono.get(x).setText(document.get("nombreOficio").toString());
+                                icono.get(x).setLayoutParams( new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
                                 icono.get(x).setTag(document.get("nombreOficio").toString());
-
-                            //    icono.get(x).setBackgroundResource(R.drawable.driver);
-
-                            //    referencia = storage.getReference().child("fotosOficios").child(document.get("nombreOficio").toString()+".jpg");
-                                referencia = storage.getReference().child(mAuth.getUid()).child("profile.jpg");
-
-                                Log.i("referencia",referencia.toString());
-
                                 GlideApp.with(homeView )
                                         .load(referencia)
                                         .into(icono.get(x));
+
 
 
 

@@ -1,4 +1,4 @@
-package com.example.handshaker.ui.send;
+package com.example.handshaker.ui.Mensaje;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

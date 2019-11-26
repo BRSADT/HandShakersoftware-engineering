@@ -1,4 +1,4 @@
-package com.example.handshaker.ui.tools;
+package com.example.handshaker.ui.TrabajadorSeleccionado;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,16 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.handshaker.GlideApp;
 import com.example.handshaker.R;
+import com.example.handshaker.ui.Mensaje.SendFragment;
+import com.example.handshaker.ui.TrabajadoresOficioSeleccionado.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -49,6 +51,10 @@ public class ToolsFragment extends Fragment {
         fotoTrabajador=(ImageView)TrabajadorView.findViewById(R.id.fotoPerfil);
         nombre=(TextView) TrabajadorView.findViewById(R.id.Nombre);
         oficio=(TextView) TrabajadorView.findViewById(R.id.Oficio);
+        FloatingActionButton fab =  TrabajadorView.findViewById(R.id.fab);
+
+
+
 
        /* final TextView textView = root.findViewById(R.id.text_tools);
         toolsViewModel.getText().observe(this, new Observer<String>() {
@@ -67,8 +73,33 @@ public class ToolsFragment extends Fragment {
             Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
 
         }
+        //dar click a Mensaje
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendFragment newGamefragment = new SendFragment();
+                FragmentTransaction fragmentTransaction;
+                Bundle arguments = new Bundle();
+                arguments.putString("Seleccion",sel);
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                newGamefragment.setArguments(arguments);
+
+                fragmentTransaction.replace(R.id.fragmento, newGamefragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+
+            }
+        });
 
 //cambiar datos
+
+
+
+
+
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
