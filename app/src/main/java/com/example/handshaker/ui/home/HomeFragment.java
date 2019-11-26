@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,38 +20,45 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.handshaker.GlideApp;
 import com.example.handshaker.R;
 import com.example.handshaker.ui.gallery.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     ArrayList<LinearLayout> layoutSeparar=new ArrayList<LinearLayout>();
-    ArrayList<Button> icono=new ArrayList<Button >();
+    ArrayList<ImageView> icono=new ArrayList<ImageView>();
     private  FirebaseFirestore db;
     private HomeViewModel homeViewModel;
     View homeView;
     int x=0;
+    StorageReference storageRef;
+    private FirebaseAuth mAuth;
+    FirebaseStorage storage ;
+    StorageReference referencia ;
     LinearLayout ll;
+    StorageReference storageReference;
     LinearLayout.LayoutParams o;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
          homeView = inflater.inflate(R.layout.fragment_home, container, false);
-       // final TextView textView = root.findViewById(R.id.text_home);
-     /*   homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-    */
+        //FirebaseStorage storage = FirebaseStorage.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+         // inicializat
+     storage = FirebaseStorage.getInstance();
+       storageReference = FirebaseStorage.getInstance().getReference();
+
 
 
          ll = (LinearLayout)homeView.findViewById(R.id.Scroll);
@@ -74,11 +82,26 @@ public class HomeFragment extends Fragment {
                                 o.setMargins(0,0,0,10);
                                 layoutSeparar.get(x).setLayoutParams(o);
                                 layoutSeparar.get(x).setOrientation(LinearLayout.HORIZONTAL);
-                                icono.add(new Button(homeView.getContext()));
+                                icono.add(new ImageView(homeView.getContext()));
+
+
                                 icono.get(x).setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2.0f));
-                                icono.get(x).setText(document.get("nombreOficio").toString());
+                            //    icono.get(x).setText(document.get("nombreOficio").toString());
                                 icono.get(x).setTag(document.get("nombreOficio").toString());
-                                icono.get(x).setBackgroundResource(R.drawable.driver);
+
+                            //    icono.get(x).setBackgroundResource(R.drawable.driver);
+
+                            //    referencia = storage.getReference().child("fotosOficios").child(document.get("nombreOficio").toString()+".jpg");
+                                referencia = storage.getReference().child(mAuth.getUid()).child("profile.jpg");
+
+                                Log.i("referencia",referencia.toString());
+
+                                GlideApp.with(homeView )
+                                        .load(referencia)
+                                        .into(icono.get(x));
+
+
+
                                 icono.get(x).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
