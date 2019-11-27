@@ -191,7 +191,7 @@ public class DatosClientes extends AppCompatActivity {
     }
 
     public boolean ValidarCaptura(){
-        if(txtNombre.getText().toString().equals("") || txtApellido.getText().toString().equals("")){
+        if(txtNombre.getText().toString().trim().equals("") || txtApellido.getText().toString().trim().equals("")){
             Toast.makeText(getApplicationContext(),"ERROR: Nombre o apellido vacío" , Toast.LENGTH_LONG).show();
             return false;
         }
