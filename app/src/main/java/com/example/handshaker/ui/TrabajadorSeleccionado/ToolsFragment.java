@@ -81,7 +81,7 @@ public class ToolsFragment extends Fragment {
                ShareFragment newGamefragment = new ShareFragment();
                 FragmentTransaction fragmentTransaction;
                 Bundle arguments = new Bundle();
-                arguments.putString("Seleccion",sel);
+                arguments.putString("IdTrabajador",sel);
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 newGamefragment.setArguments(arguments);

@@ -56,7 +56,10 @@ mensaje= Mensaje.findViewById(R.id.txtMensaje);
                 hashMap.put("emisor",mAuth.getUid());
                 hashMap.put("mensaje",mensaje.getText().toString());
 
-                myRef.child("Chats").push().setValue(hashMap);
+                myRef.child("Chats").child(sel).push().setValue(hashMap);
+                myRef.child("Chats").child(mAuth.getUid()).push().setValue(hashMap);
+
+
 
             }
 
