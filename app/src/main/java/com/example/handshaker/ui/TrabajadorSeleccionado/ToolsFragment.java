@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.handshaker.GlideApp;
 import com.example.handshaker.R;
 import com.example.handshaker.ui.Mensaje.SendFragment;
+import com.example.handshaker.ui.MensajesConTrabajador.ShareFragment;
 import com.example.handshaker.ui.TrabajadoresOficioSeleccionado.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -77,7 +78,7 @@ public class ToolsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendFragment newGamefragment = new SendFragment();
+               ShareFragment newGamefragment = new ShareFragment();
                 FragmentTransaction fragmentTransaction;
                 Bundle arguments = new Bundle();
                 arguments.putString("Seleccion",sel);

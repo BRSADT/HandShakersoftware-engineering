@@ -1,4 +1,4 @@
-package com.example.handshaker.ui.share;
+package com.example.handshaker.ui.MensajesConTrabajador;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
