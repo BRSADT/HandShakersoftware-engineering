@@ -55,19 +55,6 @@ public class ToolsFragment extends Fragment {
         FloatingActionButton fab =  TrabajadorView.findViewById(R.id.fab);
 
 
-
-
-       /* final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
-*/
-
-
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             sel = bundle.getString("IdTrabajador");
@@ -78,7 +65,7 @@ public class ToolsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               ShareFragment newGamefragment = new ShareFragment();
+               SendFragment newGamefragment = new SendFragment();
                 FragmentTransaction fragmentTransaction;
                 Bundle arguments = new Bundle();
                 arguments.putString("IdTrabajador",sel);
