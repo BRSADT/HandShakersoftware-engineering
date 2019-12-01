@@ -159,7 +159,8 @@ public class SendFragment extends Fragment {
                     if (child.getKey().toString().equals("mensaje")){
 
                         if (Quien.equals(sel.toString())){
-                            men="\t\t\t\t\t\t\t\t\t\t\t\t\t"+child.getValue().toString();
+                            men="\t\t\t\t\t\t\t\t\t\t\t\t\t+" +
+                                    ""+child.getValue().toString();
 
                         }else
                     {

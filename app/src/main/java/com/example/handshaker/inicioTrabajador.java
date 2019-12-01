@@ -121,12 +121,7 @@ public class inicioTrabajador extends AppCompatActivity {
         });
 
 
-        //CAMBIAR VISTA HOME(DONDE APARECERAN LOS OFICIOS)
-        //View homeView = navigationView.get(0);
-       /* homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View homeView = inflater.inflate(R.layout.fragment_home, container, false);
-*/
+
 
    }
 

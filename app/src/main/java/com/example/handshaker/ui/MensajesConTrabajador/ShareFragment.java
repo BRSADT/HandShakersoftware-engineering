@@ -39,6 +39,7 @@ public class ShareFragment extends Fragment {
 
         btnEnviarMensaje= MsnTrabajador.findViewById(R.id.btnEnviarMSN);
 
+        //se va al fragmento de la clase SendFragment que es para mandar mensajes.
         btnEnviarMensaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
