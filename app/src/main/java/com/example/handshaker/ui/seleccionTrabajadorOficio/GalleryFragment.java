@@ -1,4 +1,4 @@
-package com.example.handshaker.ui.TrabajadoresOficioSeleccionado;
+package com.example.handshaker.ui.seleccionTrabajadorOficio;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -113,7 +113,7 @@ String sel="";
                                 layoutFotos.add(new LinearLayout( OficioView.getContext()));
                                 Parfotos.setMargins(0,0,0,10);
                                 layoutFotos.get(x).setLayoutParams(Parfotos);
-                             //   layoutFotos.get(x).setBackground(@Dra);
+
                                 layoutFotos.get(x).setOrientation(LinearLayout.HORIZONTAL);
 
 

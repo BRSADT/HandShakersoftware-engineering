@@ -29,9 +29,6 @@ public class SlideshowFragment extends Fragment {
 
 
 
-
-
-
         return vistaPagos;
     }
 }

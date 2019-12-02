@@ -144,7 +144,7 @@ public class SendFragment extends Fragment {
         referenciaChat.child("Chats").child(mAuth.getUid()).child(sel).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ScrollMensajes.fullScroll(1);
+                ScrollMensajes.fullScroll(0);
                     String men="";
                 String Quien="";
                 for (DataSnapshot child: dataSnapshot.getChildren()) {
