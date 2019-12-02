@@ -20,8 +20,7 @@ public class SlideshowFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
+        slideshowViewModel = ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View vistaPagos = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
 
