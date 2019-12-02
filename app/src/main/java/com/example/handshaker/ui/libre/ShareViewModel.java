@@ -1,16 +1,16 @@
-package com.example.handshaker.ui.TrabajadoresOficioSeleccionado;
+package com.example.handshaker.ui.libre;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ShareViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ShareViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is share fragment");
     }
 
     public LiveData<String> getText() {

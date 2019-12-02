@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.handshaker.GlideApp;
 import com.example.handshaker.R;
-import com.example.handshaker.ui.TrabajadoresOficioSeleccionado.GalleryFragment;
+import com.example.handshaker.ui.seleccionTrabajadorOficio.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

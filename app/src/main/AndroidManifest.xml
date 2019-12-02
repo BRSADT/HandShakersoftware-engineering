@@ -9,21 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CalificacionDatos"></activity>
         <activity
             android:name=".inicioTrabajador"
-
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".DatosTrabajadores"
-            android:label="Ingresar Información"/>
-
-        <activity android:name=".DatosClientes"
-            android:label="Ingresar Información"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DatosTrabajadores"
+            android:label="Ingresar Información" />
+        <activity
+            android:name=".DatosClientes"
+            android:label="Ingresar Información" />
         <activity android:name=".inicioSesion" />
-        <activity android:name=".Registro"
-            android:label ="Registro"/>
-
+        <activity
+            android:name=".Registro"
+            android:label="Registro" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

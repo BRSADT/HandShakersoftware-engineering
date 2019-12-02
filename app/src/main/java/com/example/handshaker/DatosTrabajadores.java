@@ -137,7 +137,7 @@ public class DatosTrabajadores extends AppCompatActivity {
                     user.put("Apellido", txtApellido.getText().toString());
                     user.put("Oficio", cmbOficio.getSelectedItem().toString());
                     user.put("Telefono", txtTelefono.getText().toString());
-                    //user.put("Curriculum", ObtenerCurriculum());
+
                     user.put("Horario", cmbHor1.getSelectedItem().toString() + "-" + cmbHor2.getSelectedItem().toString());
                     user.put("CorreoContacto", txtCorreoContacto.getText().toString());
                     user.put("FechaReg", ObtenerFechaHoy());
@@ -156,6 +156,9 @@ public class DatosTrabajadores extends AppCompatActivity {
 
                                 }
                             });
+
+
+
 
                     //subir archivos
 
@@ -300,5 +303,14 @@ public class DatosTrabajadores extends AppCompatActivity {
         Log.i("Dia de hoy", formatter.format(date));
         return formatter.format(date);
     }
+
+
+
+
+
+
+
+
+
 
 }
