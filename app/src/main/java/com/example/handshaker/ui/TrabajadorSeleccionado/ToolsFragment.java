@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -27,6 +28,8 @@ import com.example.handshaker.inicioTrabajador;
 import com.example.handshaker.ui.Mensaje.SendFragment;
 import com.example.handshaker.ui.seleccionTrabajadorOficio.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +47,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ToolsFragment extends Fragment  implements Serializable  {
 
@@ -68,8 +73,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
     ArrayList<LinearLayout> layoutSeparar2=new ArrayList<LinearLayout>();
     ArrayList<TextView> comentarios=new ArrayList<TextView>();
     ArrayList<LinearLayout> principal=new ArrayList<LinearLayout>();
-
-
+    Button btnSolicitar;
     LinearLayout.LayoutParams o,Parfotos,Pseparar1,Pseparar2,PDatos,Pprincipal;
     int  x=0;
     ArrayList<LinearLayout> lcomentario=new ArrayList<LinearLayout>();
@@ -87,6 +91,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
         nombre=(TextView) TrabajadorView.findViewById(R.id.Nombre);
         oficio=(TextView) TrabajadorView.findViewById(R.id.Oficio);
         txtInfoT=(TextView) TrabajadorView.findViewById(R.id.txtInfoT);
+        btnSolicitar=(Button) TrabajadorView.findViewById(R.id.btnSolicitar);
         Horario1=(TextView) TrabajadorView.findViewById(R.id.Horario1);
         tel=(TextView) TrabajadorView.findViewById(R.id.tel);
         txtCorreo=(TextView) TrabajadorView.findViewById(R.id.txtCorreo);
@@ -134,6 +139,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
 
             }
         });
+
 
 //cambiar datos
 
@@ -295,9 +301,78 @@ public class ToolsFragment extends Fragment  implements Serializable  {
             }
         });
 
+//BOTON
+        btnSolicitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> datos = new HashMap<>();
+                Log.i("MENSAJE3",btnSolicitar.getText().toString());
+
+                switch (btnSolicitar.getText().toString()) {
+                    case "Solicitar":
+                        Log.i("MENSAJE3","askdj");
+                        btnSolicitar.setText("ESPERANDO CONFIRMACION");
+                        datos.put("estado", "ESPERANDO CONFIRMACION");
+                        db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid()).set(datos)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                          @Override
+                                                          public void onSuccess(Void aVoid) {
+
+
+                                                          }});
+                        break;
+                    case "ESPERANDO CONFIRMACION":
+
+
+                        break;
+                    case "FINALIZAR":
+                        datos.put("estado", "Solicitar");
+                        db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid()).set(datos)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+
+                                    }});
+                        break;
+                }
+
+
+                //Add a new document with a generated ID
+            }
+        });
+
+
+//verificar estado boton
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference documentReference = db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot != null && documentSnapshot.exists()) {
+                        Log.i("MENSAJE3","EXISTE");
+                        Log.d("MENSAJE3", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                        Log.d("MENSAJE3", documentSnapshot.get("estado").toString() + " => " + documentSnapshot.getData());
+                        btnSolicitar.setText(documentSnapshot.get("estado").toString());
 
 
 
+
+                    }else{
+                        Log.i("MENSAJE3","NO EXISTE");  }
+
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("MENSAJE3","ERROR");
+                    }
+                });
 
 
         return TrabajadorView;
