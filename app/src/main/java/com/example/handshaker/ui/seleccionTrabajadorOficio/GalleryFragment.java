@@ -92,6 +92,7 @@ String sel="";
                                     public void onClick(View view) {
                                        Toast.makeText(OficioView.getContext(),"dio click "+view.getTag().toString() , Toast.LENGTH_SHORT).show();
                                         //abrir datos del seleccionado
+                                        x=0;
                                         ToolsFragment newGamefragment = new ToolsFragment();
                                         FragmentTransaction fragmentTransaction;
                                         Bundle arguments = new Bundle();
@@ -145,8 +146,24 @@ String sel="";
 
                                   nombrecompleto.get(x).setText(document.get("Nombre").toString()+" "+ document.get("Apellido").toString());
 
+                                if(nombrecompleto.get(x).getParent() != null) {
+                                    ((ViewGroup)nombrecompleto.get(x).getParent()).removeView(nombrecompleto.get(x)); // <- fix
+                                }
+
+                                if(icono.get(x).getParent() != null) {
+                                    ((ViewGroup)icono.get(x).getParent()).removeView(icono.get(x)); // <- fix
+                                }
+                                if(layoutFotos.get(x).getParent() != null) {
+                                    ((ViewGroup)layoutFotos.get(x).getParent()).removeView(layoutFotos.get(x)); // <- fix
+                                }
+                                if(layoutDatos.get(x).getParent() != null) {
+                                    ((ViewGroup)layoutDatos.get(x).getParent()).removeView(layoutDatos.get(x)); // <- fix
+                                }
+
                                 layoutDatos.get(x).addView(nombrecompleto.get(x));
+
                               layoutFotos.get(x).addView(icono.get(x));
+
                                 layoutSeparar.get(x).addView(layoutFotos.get(x));
                                 layoutSeparar.get(x).addView(layoutDatos.get(x));
                                 x++;
@@ -157,7 +174,9 @@ String sel="";
 
                             for (int i=0;i<x;i++){
                                 Log.d("mensaje", String.valueOf(i) );
-
+                                if(layoutSeparar.get(i).getParent() != null) {
+                                    ((ViewGroup)layoutSeparar.get(i).getParent()).removeView(layoutSeparar.get(i)); // <- fix
+                                }
                                 ll.addView(layoutSeparar.get(i));
                             }
 
