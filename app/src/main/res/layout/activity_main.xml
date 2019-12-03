@@ -24,6 +24,15 @@
                 android:layout_width="143dp"
                 android:layout_height="148dp"
                 app:srcCompat="@drawable/logo_handshaker" />
+
+            <TextView
+                android:id="@+id/lblNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="HANDSHAKER"
+                android:textAlignment="center"
+                android:textColor="@color/md_red_400"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,7 +54,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bienvenidos" />
+                android:text="¡Bienvenido!"
+                android:textAlignment="center"
+                android:textColor="@color/md_black_1000"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="0dp"
