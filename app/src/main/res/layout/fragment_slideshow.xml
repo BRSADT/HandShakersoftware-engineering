@@ -5,197 +5,233 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <!-- <com.braintreepayments.cardform.view.CardForm
+         android:id="@+id/card_form"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"  />-->
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="18"
-            android:orientation="vertical">
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:orientation="horizontal"></LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="18"
+             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/lblRealizarPago"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:text="Realizar Pago\n¡Solo $100 al mes!"
-                android:textAlignment="center"
-                android:textColor="@color/md_black_1000"
-                android:textSize="24sp"
-                android:lines="2" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical"></LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+             <TextView
+                 android:id="@+id/lblRealizarPago"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="2"
+                 android:text="Realizar Pago\n¡Solo $100 al mes!"
+                 android:textAlignment="center"
+                 android:textColor="@color/md_black_1000"
+                 android:textSize="24sp"
+                 android:lines="2" />
 
-            </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="horizontal">
+             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="2"
+                 android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/lblPropietario"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Propietario"
-                        android:textSize="18sp" />
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="2"
+                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/txtPropietario"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                     <TextView
+                         android:id="@+id/lblPropietario"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:text="Propietario"
+                         android:textSize="18sp" />
 
-                </LinearLayout>
+                     <EditText
+                         android:id="@+id/txtPropietario"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="2"
+                         android:ems="10"
+                         android:inputType="textPersonName" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                 </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/lblCodigoSeguridad"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Código de seguridad"
-                        android:textSize="13sp" />
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1"
+                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editText3"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:ems="10"
-                        android:inputType="number" />
+                     <TextView
+                         android:id="@+id/lblCodigoSeguridad"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:text="CVV"
+                         android:textSize="18sp" />
 
-                </LinearLayout>
+                     <EditText
+                         android:id="@+id/txtCodigoSeguridad"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="2"
+                         android:ems="10"
+                         android:inputType="number"
+                         android:maxLength="3"/>
 
-            </LinearLayout>
+                 </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+             </LinearLayout>
 
-            <TextView
-                android:id="@+id/lblNumeroTarjeta"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Numero de Tarjeta"
-                android:textSize="18sp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical"></LinearLayout>
 
-            <EditText
-                android:id="@+id/txtNumeroTarjeta"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:ems="10"
-                android:inputType="number" />
+             <TextView
+                 android:id="@+id/lblNumeroTarjeta"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:text="Numero de Tarjeta"
+                 android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="@dimen/mb_aspect_ratio_card_id1"
+                 android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="horizontal">
+                 <EditText
+                     android:id="@+id/txtNumeroTarjeta"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:ems="10"
+                     android:inputType="number"
+                     android:maxLength="16" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
+                 <ImageView
+                     android:id="@+id/imgTipoTarjeta"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     tools:srcCompat="@drawable/logo_otro" />
+             </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/lblFechaExpiración"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Fecha de expiración"
-                        android:textSize="18sp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical"></LinearLayout>
 
-                    <EditText
-                        android:id="@+id/txtFecha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="date" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="2"
+                 android:orientation="horizontal">
 
-                </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgTipoTarjeta"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:srcCompat="@drawable/logo_visa" />
+                     <TextView
+                         android:id="@+id/lblFechaExpiración"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:text="Fecha de expiración"
+                         android:textSize="18sp" />
 
-            </LinearLayout>
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+                         <Spinner
+                             android:id="@+id/cmbMes"
+                             android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_weight="5" />
 
-            <Button
-                android:id="@+id/btnConfirmar"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:text="Confirmar"
-                android:textSize="24sp" />
+                         <TextView
+                             android:id="@+id/lblSeparador"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:layout_weight="1"
+                             android:text="/"
+                             android:textAlignment="center"
+                             android:textSize="30sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+                         <Spinner
+                             android:id="@+id/cmbAnio"
+                             android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_weight="5" />
 
-        </LinearLayout>
+                     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
-    </LinearLayout>
+                 </LinearLayout>
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical"></LinearLayout>
+
+             <Button
+                 android:id="@+id/btnConfirmar"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="2"
+                 android:text="Confirmar"
+                 android:textSize="24sp" />
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:orientation="vertical"></LinearLayout>
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:orientation="horizontal"></LinearLayout>
+     </LinearLayout>
+
 </RelativeLayout>

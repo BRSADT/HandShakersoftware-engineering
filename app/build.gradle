@@ -46,6 +46,13 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
     //anterior   implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    implementation 'com.braintreepayments:card-form:4.2.0'
+    implementation('com.microblink:blinkcard:1.0.1@aar') {
+        transitive = true
+    }
+}
 
+repositories {
+    maven { url 'https://maven.microblink.com' }
 }
 apply plugin: 'com.google.gms.google-services'

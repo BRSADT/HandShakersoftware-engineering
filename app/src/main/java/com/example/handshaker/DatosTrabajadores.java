@@ -137,29 +137,26 @@ public class DatosTrabajadores extends AppCompatActivity {
                     user.put("Apellido", txtApellido.getText().toString());
                     user.put("Oficio", cmbOficio.getSelectedItem().toString());
                     user.put("Telefono", txtTelefono.getText().toString());
-
-                    user.put("Horario", cmbHor1.getSelectedItem().toString() + "-" + cmbHor2.getSelectedItem().toString());
                     user.put("CorreoContacto", txtCorreoContacto.getText().toString());
-                    user.put("FechaReg", ObtenerFechaHoy());
+                    user.put("Horario", cmbHor1.getSelectedItem().toString() + "-" + cmbHor2.getSelectedItem().toString());
                     user.put("Urgencia", chkbxUrgencia.isChecked());
-                    user.put("PagoVigente", false);
+                    user.put("FechaReg", ObtenerFechaHoy());
                     String resumen = txtInfo.getText().toString();
-                    user.put("Info", resumen); //AQUI
+                    user.put("Info", resumen);
+                    user.put("NpersonasCal",0);
+                    user.put("Puntaje",0);
+                    user.put("PagoVigente", "-----------");
+                    user.put("Bloqueado", false);
 
                     //Add a new document with a generated ID
                     db.collection("Trabajador").document(mAuth.getUid()).set(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getApplicationContext(),"Se ha guardado datos" , Toast.LENGTH_SHORT).show();
-
-
-                                }
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(),"Se ha guardado datos" , Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                             });
-
-
-
-
                     //subir archivos
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -179,6 +176,8 @@ public class DatosTrabajadores extends AppCompatActivity {
                             // ...
                         }
                     });
+
+                    finishActivity(RESULT_OK);
                 }
             }
         });
