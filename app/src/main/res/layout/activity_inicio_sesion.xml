@@ -71,8 +71,9 @@ android:orientation="vertical">
             android:layout_height="0dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="usuario"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:text="handshaker5p@gmail.com"
+            tools:text="handshaker5p@gmail.com" />
 
         <EditText
             android:id="@+id/txtPass"
@@ -80,8 +81,9 @@ android:orientation="vertical">
             android:layout_height="0dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="contraseña"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123456"
+            tools:text="123456" />
 
         <Button
             android:id="@+id/btnEnviar"
