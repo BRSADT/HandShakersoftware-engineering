@@ -2,6 +2,7 @@ package com.example.handshaker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.handshaker.ui.Mensaje.SendFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +45,8 @@ public class CalificacionDatos extends AppCompatActivity  implements Serializabl
     RatingBar rb,rbanterior;
     private  FirebaseFirestore db;
     Button enviar;
+    int personasCal;
+    float PuntajeT,puntaje;
     EditText txtComentario;
 float calificacion=0;
 
@@ -85,8 +90,8 @@ float calificacion=0;
                     DocumentSnapshot document = task.getResult();
                     txtNombre.setText(document.get("Nombre").toString()+" "+document.get("Apellido").toString());
                     txtOficio.setText(document.get("Oficio").toString());
-
-
+                    personasCal=Integer.parseInt(document.get("NpersonasCal").toString());
+                    PuntajeT=Float.parseFloat(document.get("Puntaje").toString());
 
                     Log.d("Datos-info del usuario", "Cached document data: " + document.getData());
                 } else {
@@ -111,12 +116,39 @@ enviar.setOnClickListener(new View.OnClickListener() {
         myRef.child("Calificaciones").child(sel).child(mAuth.getUid()).push().setValue(hashMap);
 
 
+//cambiar a calificado
 
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("calificado", "calificado");
+        datos.put("estado", "Solicitar");
+        db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid()).set(datos)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+
+                    }});
+            personasCal++;
+         puntaje=PuntajeT+rb.getRating();
+        Map<String, Object> datos2 = new HashMap<>();
+        datos2.put("NpersonasCal",personasCal );
+        datos2.put("Puntaje",personasCal);
+        db.collection("Trabajador").document(sel).update(datos2)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+
+                    }});
 
 
     }
 
 });
+
+
+
+
 
     }
 }

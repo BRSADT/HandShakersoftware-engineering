@@ -72,7 +72,7 @@ public class SendFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            sel = bundle.getString("IdTrabajador");
+            sel = bundle.getString("IdDestinatario");
             Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
 
         }

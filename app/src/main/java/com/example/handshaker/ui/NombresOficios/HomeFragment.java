@@ -114,10 +114,13 @@ public class HomeFragment extends Fragment {
                                         fragmentTransaction.replace(R.id.fragmento, newGamefragment);
                                         fragmentTransaction.addToBackStack(null);
                                         fragmentTransaction.commit();
-
+                                        ll.removeAllViews();
+                                        x=0;
                                                   //intent
                                     }
                                 });
+
+                                layoutSeparar.get(x).removeAllViews();
 
                                 layoutSeparar.get(x).addView(icono.get(x));
                                 x++;
@@ -125,9 +128,11 @@ public class HomeFragment extends Fragment {
 
                             Log.d("mensaje", String.valueOf(x));
 
-
+                            ll.removeAllViews();
                             for (int i=0;i<x;i++){
-                                Log.d("mensaje", String.valueOf(i) );
+                                if(layoutSeparar.get(i).getParent() != null) {
+                                    ((ViewGroup)layoutSeparar.get(i).getParent()).removeView(layoutSeparar.get(i)); // <- fix
+                                }
 
                                 ll.addView(layoutSeparar.get(i));
                             }

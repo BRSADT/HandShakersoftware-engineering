@@ -56,7 +56,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
     String sel="";
     private FirebaseAuth mAuth;
     ImageView fotoTrabajador;
-    TextView nombre,apellido,oficio,celular,txtInfoT,Horario1,tel,txtCorreo;
+    TextView nombre,apellido,oficio,celular,txtInfoT,Horario1,tel,txtCorreo,aviso;
     View TrabajadorView;
     StorageReference storageRef;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -79,8 +79,11 @@ public class ToolsFragment extends Fragment  implements Serializable  {
     ArrayList<LinearLayout> lcomentario=new ArrayList<LinearLayout>();
     ArrayList<ImageView> foto=new ArrayList<ImageView>();
     ArrayList<String> IDusuarios=new ArrayList<String>();
+    FloatingActionButton fab;
     ArrayList<TextView> comentario=new ArrayList<TextView>();
     ArrayList<ImageView> icono=new ArrayList<ImageView>();
+    int personasCal=0;
+    float Puntaje=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,6 +94,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
         nombre=(TextView) TrabajadorView.findViewById(R.id.Nombre);
         oficio=(TextView) TrabajadorView.findViewById(R.id.Oficio);
         txtInfoT=(TextView) TrabajadorView.findViewById(R.id.txtInfoT);
+        aviso=(TextView) TrabajadorView.findViewById(R.id.aviso);
         btnSolicitar=(Button) TrabajadorView.findViewById(R.id.btnSolicitar);
         Horario1=(TextView) TrabajadorView.findViewById(R.id.Horario1);
         tel=(TextView) TrabajadorView.findViewById(R.id.tel);
@@ -112,7 +116,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
 
 
 
-        FloatingActionButton fab =  TrabajadorView.findViewById(R.id.fab);
+        fab =  TrabajadorView.findViewById(R.id.fab);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             sel = bundle.getString("IdTrabajador");
@@ -120,13 +124,14 @@ public class ToolsFragment extends Fragment  implements Serializable  {
 
         }
         //dar click a Mensaje
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               SendFragment newGamefragment = new SendFragment();
+                SendFragment newGamefragment = new SendFragment();
                 FragmentTransaction fragmentTransaction;
                 Bundle arguments = new Bundle();
-                arguments.putString("IdTrabajador",sel);
+                arguments.putString("IdDestinatario", sel);
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 newGamefragment.setArguments(arguments);
@@ -134,12 +139,11 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                 fragmentTransaction.replace(R.id.fragmento, newGamefragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
+                x = 0;
 
 
             }
         });
-
 
 //cambiar datos
 
@@ -175,7 +179,10 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                     txtInfoT.setText(document.get("Info").toString());
                     Horario1.setText(document.get("Horario").toString());
                     txtCorreo.setText(document.get("CorreoContacto").toString());
-
+                     personasCal=Integer.parseInt(document.get("NpersonasCal").toString());
+                     Puntaje=Integer.parseInt(document.get("Puntaje").toString());
+                    float res=Puntaje/personasCal;
+                    rb.setRating(res);
 
 
                     Log.d("Datos-info del usuario", "Cached document data: " + document.getData());
@@ -186,15 +193,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
         });
 
 
-        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Intent i = new Intent(getActivity(), CalificacionDatos.class);
-                i.putExtra("IdTrabajador",(Serializable)sel);
-                getActivity().startActivity(i);
 
-            }
-        });
 
 
         //Si se ha escrito comentario
@@ -255,13 +254,31 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                                     .load(referencia2)
                                     .into(icono.get(x));
 
+                    if(comentarios.get(x).getParent() != null) {
+                        ((ViewGroup)comentarios.get(x).getParent()).removeView(comentarios.get(x)); // <- fix
+                    }
+
+                    if(icono.get(x).getParent() != null) {
+                        ((ViewGroup)icono.get(x).getParent()).removeView(icono.get(x)); // <- fix
+                    }
+                    if(layoutSeparar1.get(x).getParent() != null) {
+                        ((ViewGroup)layoutSeparar1.get(x).getParent()).removeView(layoutSeparar1.get(x)); // <- fix
+                    }
+                    if(layoutFotos.get(x).getParent() != null) {
+                        ((ViewGroup)layoutFotos.get(x).getParent()).removeView(layoutFotos.get(x)); // <- fix
+                    }
+                    if(layoutSeparar2.get(x).getParent() != null) {
+                        ((ViewGroup)layoutSeparar2.get(x).getParent()).removeView(layoutSeparar2.get(x)); // <- fix
+                    }
+                    if(layoutDatos.get(x).getParent() != null) {
+                        ((ViewGroup)layoutDatos.get(x).getParent()).removeView(layoutDatos.get(x)); // <- fix
+                    }
 
 
 
                             layoutDatos.get(x).addView(comentarios.get(x));
                             layoutFotos.get(x).addView(icono.get(x));
-                    principal.get(x).addView(layoutSeparar1.get(x));
-
+                            principal.get(x).addView(layoutSeparar1.get(x));
                     principal.get(x).addView(layoutFotos.get(x));
                     principal.get(x).addView(layoutSeparar2.get(x));
                     principal.get(x).addView(layoutDatos.get(x));
@@ -273,7 +290,9 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                     }
 
                 for (int i=0;i<x;i++){
-
+                    if(principal.get(i).getParent() != null) {
+                        ((ViewGroup)principal.get(i).getParent()).removeView(principal.get(i)); // <- fix
+                    }
                     ll.addView(principal.get(i));
                 }
 
@@ -301,7 +320,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
             }
         });
 
-//BOTON
+//BOTON solicitar
         btnSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -313,6 +332,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                         Log.i("MENSAJE3","askdj");
                         btnSolicitar.setText("ESPERANDO CONFIRMACION");
                         datos.put("estado", "ESPERANDO CONFIRMACION");
+                        datos.put("calificado", "no ha terminado");
                         db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid()).set(datos)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                           @Override
@@ -327,10 +347,32 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                         break;
                     case "FINALIZAR":
                         datos.put("estado", "Solicitar");
+                        btnSolicitar.setText("SOLICITAR");
+                        datos.put("calificado", "Sin calificar");
                         db.collection("Trabajador").document(sel).collection("Clientes").document(mAuth.getUid()).set(datos)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
+                                        Log.d("MENSAJE6", "no ha calificado");
+                                        aviso.setText("Favor de calificar");
+
+                                        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                                            @Override
+                                            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                                                Intent i = new Intent(getActivity(), CalificacionDatos.class);
+                                                i.putExtra("IdTrabajador",(Serializable)sel);
+                                                getActivity().startActivity(i);
+
+                                            }
+                                        });
+
+
+
+
+                                        btnSolicitar.setEnabled(false);
+
+
+
 
 
                                     }});
@@ -353,16 +395,62 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                 if(task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot != null && documentSnapshot.exists()) {
-                        Log.i("MENSAJE3","EXISTE");
-                        Log.d("MENSAJE3", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-                        Log.d("MENSAJE3", documentSnapshot.get("estado").toString() + " => " + documentSnapshot.getData());
                         btnSolicitar.setText(documentSnapshot.get("estado").toString());
 
+                        Log.d("MENSAJE6", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                             if (documentSnapshot.contains("calificado")) {
 
 
 
+
+
+                                 Log.d("MENSAJE6", "ya han interactuado");
+                            if (documentSnapshot.get("calificado").toString().equals("Sin calificar")) {
+                                Log.d("MENSAJE6", "no ha calificado");
+                                aviso.setText("Favor de calificar");
+
+                                rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                                    @Override
+                                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                                        Intent i = new Intent(getActivity(), CalificacionDatos.class);
+                                        i.putExtra("IdTrabajador",(Serializable)sel);
+                                        getActivity().startActivity(i);
+
+                                    }
+                                });
+
+
+
+
+                                btnSolicitar.setEnabled(false);
+                            }
+                            if (documentSnapshot.get("calificado").toString().equals("calificado")) {
+                                Log.d("MENSAJE6", "ya ha calificado");
+                                aviso.setText("");
+                                btnSolicitar.setEnabled(true);
+                                rb.setClickable(false);
+                                rb.setOnRatingBarChangeListener(null);
+                                btnSolicitar.setEnabled(true);
+                            }
+                            btnSolicitar.setText(documentSnapshot.get("estado").toString());
+                        }else{
+                                 Log.d("MENSAJE6", "no ha terminado(?)");
+                            aviso.setText("");
+                            btnSolicitar.setEnabled(true);
+                                 rb.setOnRatingBarChangeListener(null);
+                            rb.setClickable(false);
+
+
+                        }
+                        //AQUI VERIFICARA SI HA CALIFICADO O NO
                     }else{
-                        Log.i("MENSAJE3","NO EXISTE");  }
+
+                        Log.d("MENSAJE6", "no ha interactuado");
+                        aviso.setText("");
+                        btnSolicitar.setEnabled(true);
+                        rb.setClickable(false);
+                        rb.setOnRatingBarChangeListener(null);
+                    }
 
                 }
             }
