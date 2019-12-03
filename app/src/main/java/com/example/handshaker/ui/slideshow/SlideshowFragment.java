@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,17 +18,24 @@ import com.example.handshaker.R;
 public class SlideshowFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
+    private ImageView imgTipoTarjeta;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         slideshowViewModel = ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View vistaPagos = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
+        imgTipoTarjeta = (ImageView) vistaPagos.findViewById(R.id.imgTipoTarjeta);
 
+        LogoTarjetaDefecto();
         //todo tu codigo
 
 
 
         return vistaPagos;
+    }
+
+    public void LogoTarjetaDefecto(){
+        imgTipoTarjeta.setImageResource(R.drawable.logo_otro);
     }
 }
