@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -137,7 +138,8 @@ enviar.setOnClickListener(new View.OnClickListener() {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-
+                        Intent i = new Intent(getApplicationContext(), inicioTrabajador.class);
+                        startActivity(i);
 
                     }});
 

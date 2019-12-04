@@ -22,7 +22,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
-
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -50,9 +50,12 @@ dependencies {
     implementation('com.microblink:blinkcard:1.0.1@aar') {
         transitive = true
     }
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 repositories {
     maven { url 'https://maven.microblink.com' }
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

@@ -114,7 +114,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
         ll = (LinearLayout)TrabajadorView.findViewById(R.id.scrollCom);
 
 
-
+rb.setMax(5);
 
         fab =  TrabajadorView.findViewById(R.id.fab);
         Bundle bundle = this.getArguments();
@@ -408,7 +408,8 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                             if (documentSnapshot.get("calificado").toString().equals("Sin calificar")) {
                                 Log.d("MENSAJE6", "no ha calificado");
                                 aviso.setText("Favor de calificar");
-
+                                rb.setIsIndicator(false);
+                                rb.setClickable(true);
                                 rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                                     @Override
                                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -429,6 +430,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                                 aviso.setText("");
                                 btnSolicitar.setEnabled(true);
                                 rb.setClickable(false);
+                                rb.setIsIndicator(true);
                                 rb.setOnRatingBarChangeListener(null);
                                 btnSolicitar.setEnabled(true);
                             }
@@ -437,6 +439,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                                  Log.d("MENSAJE6", "no ha terminado(?)");
                             aviso.setText("");
                             btnSolicitar.setEnabled(true);
+                                 rb.setIsIndicator(true);
                                  rb.setOnRatingBarChangeListener(null);
                             rb.setClickable(false);
 
@@ -449,6 +452,7 @@ public class ToolsFragment extends Fragment  implements Serializable  {
                         aviso.setText("");
                         btnSolicitar.setEnabled(true);
                         rb.setClickable(false);
+                        rb.setIsIndicator(true);
                         rb.setOnRatingBarChangeListener(null);
                     }
 
