@@ -222,11 +222,12 @@ String sel="";
                         vigencia = true;
                     }
                 }else if(hoy.before(fechapago)){
+                    /*
                     Toast.makeText(this.getContext(), "No sé como le hiciste para pagar después del día de hoy", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "pero eso no debería suceder", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "por favor ponte en contacto con HandShaker", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "para explicar tu situación", Toast.LENGTH_LONG).show();
-
+                    */
                     vigencia = false;
                 }
             } catch (ParseException e) {

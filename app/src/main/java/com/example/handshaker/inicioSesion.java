@@ -23,6 +23,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class inicioSesion extends AppCompatActivity {
 
 
@@ -56,19 +61,12 @@ public class inicioSesion extends AppCompatActivity {
         contra=txtPass.getText().toString();
         usuario=txtUsuario.getText().toString();
 
-
-
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(usuario, contra)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-
-
-
-
 
                             db.collection("Trabajador")
                                     .get()
@@ -80,7 +78,12 @@ public class inicioSesion extends AppCompatActivity {
                                                     Log.d("datos", document.getId() + " => " + document.getData());
                                                     Log.d("datos", mAuth.getUid());
                                                     if (document.getId().equals(mAuth.getUid())) {
-                                                        Toast.makeText(getApplicationContext(), "es trabajador", Toast.LENGTH_SHORT).show();
+                                                        if(!TienePagoVigente(document.get("PagoVigente").toString())){
+                                                            Toast.makeText(getApplicationContext(), "ATENCION: Su pago no es vigente", Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(getApplicationContext(), "No aparecerá en las listas", Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(getApplicationContext(), "Deslice su dedo desde la parte izquierda", Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(getApplicationContext(), "Para poder realizar su pago desde la pestaña pagos", Toast.LENGTH_LONG).show();
+                                                        }
                                                         Intent i = new Intent(inicioSesion.this, inicioTrabajador.class);
                                                         startActivity(i);
                                                     }
@@ -91,8 +94,6 @@ public class inicioSesion extends AppCompatActivity {
                                         }
                                     });
 
-
-
                             db.collection("Clientes")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -100,11 +101,11 @@ public class inicioSesion extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                                     Log.d("datos", document.getId() + " => " + document.getData());
+                                                    Log.d("datos", document.getId() + " => " + document.getData());
                                                     Log.d("datos", mAuth.getUid());
                                                     if (document.getId().equals(mAuth.getUid())) {
-                                                        Toast.makeText(getApplicationContext(), "es cliente", Toast.LENGTH_SHORT).show();
-
+                                                        Intent i = new Intent(inicioSesion.this, inicioTrabajador.class);
+                                                        startActivity(i);
                                                     }
                                                 }
                                             } else {
@@ -112,8 +113,6 @@ public class inicioSesion extends AppCompatActivity {
                                             }
                                         }
                                     });
-
-
 
                         } else {
                             Toast .makeText(getApplicationContext(),"No es correcto email" , Toast.LENGTH_SHORT).show();
@@ -135,5 +134,42 @@ public class inicioSesion extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+    }
+
+    public boolean TienePagoVigente(String PagoVigente){
+        boolean vigencia = false;
+        if(PagoVigente.length() > 0){
+            Date hoy = Calendar.getInstance().getTime(); //Fecha del día de hoy.
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            try {
+                hoy = sdf.parse(sdf.format(hoy));
+                Date fechapago = sdf.parse(PagoVigente);
+                Log.i("Fecha hoy", "la fecha de hoy es" + hoy.toString());
+                Log.i("Fecha pago", "la fecha de pago es" + fechapago.toString());
+                if(hoy.equals(fechapago)){
+                    vigencia = true;
+                }else if(hoy.after(fechapago)){
+                    Calendar fecha1mes = Calendar.getInstance();
+                    fecha1mes.setTime(fechapago);
+                    fecha1mes.add(Calendar.MONTH, 1);
+                    if(hoy.before(fecha1mes.getTime()) || hoy.equals(fecha1mes.getTime())){
+                        vigencia = true;
+                    }
+                }else if(hoy.before(fechapago)){
+                    Toast.makeText(getApplicationContext(), "No sé como le hiciste para pagar después del día de hoy", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "pero eso no debería suceder", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "por favor ponte en contacto con HandShaker", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "para explicar tu situación", Toast.LENGTH_LONG).show();
+
+                    vigencia = false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.v("Exception", e.getLocalizedMessage());
+            }
+        }
+        return vigencia;
     }
 }

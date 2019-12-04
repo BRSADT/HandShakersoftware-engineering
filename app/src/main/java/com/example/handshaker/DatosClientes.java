@@ -101,14 +101,13 @@ public class DatosClientes extends AppCompatActivity {
 
                     //Add a new document with a generated ID
                     db.collection("Clientes").document(mAuth.getUid()).set(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getApplicationContext(),"Se ha guardado datos" , Toast.LENGTH_SHORT).show();
-
-
-                                }
-                            });
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(),"Se ha guardado datos" , Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
 
                     //subir archivos
 

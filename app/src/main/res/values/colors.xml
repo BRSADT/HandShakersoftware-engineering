@@ -680,4 +680,10 @@
     <color name="md_falcon_A400_25">#40598bae</color>
 
     <color name="md_statusbar_translucent">#4000</color>
+
+    <!--Mis colorcitos personalizados-->
+    <color name="actionbar_background">#f1ae17</color>
+    <color name="actionbar_text">#000000</color>
+    <!-- -HASTA AQUI- -->
+
 </resources>

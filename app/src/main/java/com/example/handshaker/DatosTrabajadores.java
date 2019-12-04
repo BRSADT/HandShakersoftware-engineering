@@ -90,9 +90,10 @@ public class DatosTrabajadores extends AppCompatActivity {
         txtTelefono = (EditText) findViewById(R.id.txtTelefono);
         txtInfo = (EditText) findViewById(R.id.txtInfo);
 
+        oficios.add("Panadero");
+
         LlenarHorarios();
         ObtenerOficios();
-        oficios.add("Otro");
 
         cmbOficio = (Spinner) findViewById(R.id.cmbOficio);
         cmbHor1 = (Spinner) findViewById(R.id.cmbHor1);
@@ -270,7 +271,9 @@ public class DatosTrabajadores extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        oficios.add(document.get("nombreOficio").toString());
+                        if(!document.get("nombreOficio").toString().equals(oficios.get(0))){
+                            oficios.add(document.get("nombreOficio").toString());
+                        }
                         Log.i("Elemento Agregado", "Se agrego el oficio: " + document.get("nombreOficio").toString() + "al ArrayList del spinner cmbOficios");
                     }
                 }
