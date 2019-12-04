@@ -24,6 +24,7 @@ import com.example.handshaker.ui.NombresOficios.HomeViewModel;
 import com.example.handshaker.ui.TrabajadorSeleccionado.ToolsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -57,6 +58,8 @@ String sel="";
     View OficioView;
     int x=0;
 
+    private FirebaseAuth mAuth;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
@@ -73,6 +76,7 @@ String sel="";
             //Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
 
         }
+        mAuth = FirebaseAuth.getInstance();
 
         //CONSULTA Personal
         db = FirebaseFirestore.getInstance();
@@ -85,7 +89,7 @@ String sel="";
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(TienePagoVigente(document.get("PagoVigente").toString())){
+                                if(TienePagoVigente(document.get("PagoVigente").toString()) && !document.getId().toString().equals(mAuth.getUid().toString())){
                                     Log.d("mensaje", document.getId() + " => " + document.getData());
 
                                     layoutSeparar.add(new LinearLayout(OficioView.getContext()));
@@ -222,11 +226,12 @@ String sel="";
                         vigencia = true;
                     }
                 }else if(hoy.before(fechapago)){
+                    /*
                     Toast.makeText(this.getContext(), "No sé como le hiciste para pagar después del día de hoy", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "pero eso no debería suceder", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "por favor ponte en contacto con HandShaker", Toast.LENGTH_LONG).show();
                     Toast.makeText(this.getContext(), "para explicar tu situación", Toast.LENGTH_LONG).show();
-
+                    */
                     vigencia = false;
                 }
             } catch (ParseException e) {
