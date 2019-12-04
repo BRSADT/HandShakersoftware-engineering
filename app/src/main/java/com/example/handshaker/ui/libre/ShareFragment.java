@@ -83,8 +83,6 @@ public class ShareFragment extends Fragment {
 
 
 
-        Toast.makeText(this.getContext(),"mensajes" , Toast.LENGTH_SHORT).show();
-
 
         mAuth = FirebaseAuth.getInstance();
         // inicializat

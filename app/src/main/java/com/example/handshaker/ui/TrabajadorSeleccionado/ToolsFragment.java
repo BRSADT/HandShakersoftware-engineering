@@ -120,7 +120,7 @@ rb.setMax(5);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             sel = bundle.getString("IdTrabajador");
-            Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
+
 
         }
         //dar click a Mensaje
@@ -179,8 +179,8 @@ rb.setMax(5);
                     txtInfoT.setText(document.get("Info").toString());
                     Horario1.setText(document.get("Horario").toString());
                     txtCorreo.setText(document.get("CorreoContacto").toString());
-                     personasCal=Integer.parseInt(document.get("NpersonasCal").toString());
-                     Puntaje=Integer.parseInt(document.get("Puntaje").toString());
+                     personasCal=(int) (document.getLong("NpersonasCal").intValue());
+                     Puntaje=(float)(document.getLong("Puntaje").intValue());
                     float res=Puntaje/personasCal;
                     rb.setRating(res);
 
@@ -355,6 +355,8 @@ rb.setMax(5);
                                     public void onSuccess(Void aVoid) {
                                         Log.d("MENSAJE6", "no ha calificado");
                                         aviso.setText("Favor de calificar");
+                                        rb.setIsIndicator(false);
+                                        rb.setClickable(true);
 
                                         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                                             @Override
@@ -419,8 +421,6 @@ rb.setMax(5);
 
                                     }
                                 });
-
-
 
 
                                 btnSolicitar.setEnabled(false);

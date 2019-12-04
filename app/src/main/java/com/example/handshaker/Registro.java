@@ -115,11 +115,7 @@ public class Registro extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.sign_in_button:
-                signIn();
 
-        }
     }
 
     private void signIn() {

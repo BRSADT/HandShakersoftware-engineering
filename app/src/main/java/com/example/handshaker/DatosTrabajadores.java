@@ -90,6 +90,10 @@ public class DatosTrabajadores extends AppCompatActivity {
         txtTelefono = (EditText) findViewById(R.id.txtTelefono);
         txtInfo = (EditText) findViewById(R.id.txtInfo);
 
+
+
+
+
         oficios.add("Panadero");
 
         LlenarHorarios();
@@ -105,6 +109,9 @@ public class DatosTrabajadores extends AppCompatActivity {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, horarios);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+
+
         cmbHor1.setAdapter(adapter);
         cmbHor2.setAdapter(adapter);
         adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, oficios);

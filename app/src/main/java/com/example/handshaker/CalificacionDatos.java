@@ -133,7 +133,7 @@ enviar.setOnClickListener(new View.OnClickListener() {
          puntaje=PuntajeT+rb.getRating();
         Map<String, Object> datos2 = new HashMap<>();
         datos2.put("NpersonasCal",personasCal );
-        datos2.put("Puntaje",personasCal);
+        datos2.put("Puntaje",puntaje);
         db.collection("Trabajador").document(sel).update(datos2)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -73,7 +73,6 @@ public class SendFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             sel = bundle.getString("IdDestinatario");
-            Toast.makeText(this.getContext(),sel , Toast.LENGTH_SHORT).show();
 
         }
         btnEnviarMensaje= Mensaje.findViewById(R.id.btnEnviarMSN);

@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,7 +54,7 @@ public class inicioTrabajador extends AppCompatActivity {
     private  FirebaseFirestore db;
     ArrayList<LinearLayout> layoutSeparar=new ArrayList<LinearLayout>();
     ArrayList<ImageButton> icono=new ArrayList<ImageButton >();
-
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +62,10 @@ public class inicioTrabajador extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        mAuth = FirebaseAuth.getInstance();
 
 
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+       drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -73,14 +75,71 @@ public class inicioTrabajador extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
+        db = FirebaseFirestore.getInstance();
 
-       NavController navController = Navigation.findNavController(this, R.id.fragmento);
+        db.collection("Trabajador")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("datos-tra", document.getId() + " => " + document.getData());
+
+                                if (document.getId().equals(mAuth.getUid())) {
+                                    Log.d("datos", "encontrado es trabajador");
+                                    mAppBarConfiguration = new AppBarConfiguration.Builder(
+                                            R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                                            R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                                            .setDrawerLayout(drawer)
+                                            .build();
+
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+
+
+        db.collection("Clientes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("datos-cliente", document.getId() + " => " + document.getData());
+
+                                if (document.getId().equals(mAuth.getUid())) {
+                                    //  Toast.makeText(getApplicationContext(), "es cliente", Toast.LENGTH_SHORT).show();
+                                    Log.d("datos", "encontrado es cliente");
+                                    mAppBarConfiguration = new AppBarConfiguration.Builder(
+                                            R.id.nav_home, R.id.nav_gallery,
+                                            R.id.nav_tools, R.id.nav_share)
+                                            .setDrawerLayout(drawer)
+                                            .build();
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+
+
+        NavController navController = Navigation.findNavController(this, R.id.fragmento);
        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
        NavigationUI.setupWithNavController(navigationView, navController);
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         View hView = navigationView.getHeaderView(0);
+
+
 
 
 

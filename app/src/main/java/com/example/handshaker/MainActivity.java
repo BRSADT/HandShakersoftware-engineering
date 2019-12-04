@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         iniciarSesion= (Button)findViewById(R.id.btnInicioSesion);
         Registrarse= (Button)findViewById(R.id.btnRegistrar);
-        goo=(SignInButton)findViewById(R.id.sign_in_button);
+
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,30 +84,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-
-                .requestEmail()
-
-                .build();
 
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         mAuth = FirebaseAuth.getInstance();
-        goo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-
-        });
-    }
-
-
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, SIGN_IN_CODE );
 
     }
+
+
+
 
 
 
